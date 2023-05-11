@@ -2,8 +2,8 @@ var firebase = require('firebase')
 // datos de firebase
 var config = {
 
-  apiKey: "AIzaSyB4XZyh95w7bLAIlY23Po_62EOA0tWGGe0",
-  authDomain: "keephome-2e54e.firebaseapp.com",
+  apiKey: "acjmCmLxATjbpXDkDpYqMTXBoUV7GbkNE1Kjmu2P",
+  authDomain: "https://keephome-2e54e-default-rtdb.firebaseio.com/",
   projectId: "keephome-2e54e",
   storageBucket: "keephome-2e54e.appspot.com",
   messagingSenderId: "604160895193",
