@@ -20,7 +20,7 @@ app.get('/ver', (req, res) => {
       timestampsInSnapshots: true
     });
     var wholeData = []
-	db.collection('Valores').orderBy('fecha', 'asc').get()
+	db.collection('valores').orderBy('fecha', 'asc').get()
     .then(snapshot => {
       snapshot.forEach(doc => {
       
@@ -77,7 +77,7 @@ app.get('/valor', (req, res) => {
       timestampsInSnapshots: true
     });
     var wholeData = []
-	db.collection('Valores').limit(1).orderBy('fecha','desc').get()
+	db.collection('valores').limit(1).orderBy('fecha','desc').get()
     .then(snapshot => {
       snapshot.forEach(doc => {
       
@@ -96,7 +96,7 @@ app.get('/grafica', (req, res) => {
       timestampsInSnapshots: true
     });
     var wholeData = []
-	db.collection('Valores').limit(10).orderBy('fecha','desc').get()
+	db.collection('valores').limit(10).orderBy('fecha','desc').get()
     .then(snapshot => {
       snapshot.forEach(doc => {
       
@@ -116,23 +116,21 @@ app.post('/insertar', (req, res)=>{
       timestampsInSnapshots: true
     });
     
-    db.collection('Valores').add({
+    db.collection('valores').add({
      
-      temp: req.body.temp,
-      hum: req.body.hum,
+      fecha: new Date().toJSON(),
       gas: req.body.gas,
+      movimiento: req.body.movimiento,
       ruido: req.body.ruido,
-      nombre: req.body.nombre,
-      fecha: new Date().toJSON()
+      temperatura: req.body.temperatura
     });
     res.send({
-      temp: req.body.temp,
-      hum: req.body.hum,
+      fecha: new Date().toJSON(),
       gas: req.body.gas,
+      movimiento: req.body.movimiento,
       ruido: req.body.ruido,
-      nombre: req.body.nombre,
-      fecha: new Date(),
-      status: 'Valores insertados!'
+      temperatura: req.body.temperatura,
+      status: '¡Valores insertados!'
   })
 })
 
