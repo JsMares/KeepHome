@@ -5,6 +5,14 @@ var fire = require('./fire')
 var cors = require('cors');
 var bodyParser = require('body-parser');
 
+var admin = require('firebase-admin');
+var serviceAccount = require("./keephome-2e54e-firebase-adminsdk-zhy2a-55e51be125.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  dataBaseURL: "https://keephome-2e54e-default-rtdb.firebaseio.com"
+});
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -112,20 +120,20 @@ app.get('/grafica', (req, res) => {
 
 app.post('/insertar', (req, res)=>{
   const db = fire.firestore();
-	/*db.settings({
+	db.settings({
       timestampsInSnapshots: true
-    });*/
+    });
     
     db.collection('valores').add({
      
-      //fecha: new Date().toJSON(),
+      fecha: new Date().toJSON(),
       gas: req.body.gas,
       movimiento: req.body.movimiento,
       ruido: req.body.ruido,
       temperatura: req.body.temperatura
     });
     res.send({
-      //fecha: new Date().toJSON(),
+      fecha: new Date().toJSON(),
       gas: req.body.gas,
       movimiento: req.body.movimiento,
       ruido: req.body.ruido,
