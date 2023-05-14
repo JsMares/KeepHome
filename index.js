@@ -112,9 +112,9 @@ app.get('/grafica', (req, res) => {
 
 app.post('/insertar', (req, res)=>{
   const db = fire.firestore();
-	db.settings({
+	/*db.settings({
       timestampsInSnapshots: true
-    });
+    });*/
     
     db.collection('valores').add({
      
