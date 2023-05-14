@@ -125,7 +125,7 @@ app.post('/insertar', (req, res)=>{
       temperatura: req.body.temperatura
     });
     res.send({
-      fecha: new Date().toJSON(),
+      //fecha: new Date().toJSON(),
       gas: req.body.gas,
       movimiento: req.body.movimiento,
       ruido: req.body.ruido,
