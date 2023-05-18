@@ -113,6 +113,26 @@ app.get('/grafica', (req, res) => {
   })
 })
 
+app.get('/registro_mayor', (req, res) => {
+  const db = fire.firestore();
+    db.settings({
+      timestampsInSnapshots: true
+    });
+    var wholeData = []
+	db.collection('valores').limit(10).where('gas', '>', 3000).orderBy('fecha','desc').get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+      
+        wholeData.push(doc.data())
+      });
+      console.log(wholeData)
+      res.send(wholeData)
+    })
+    .catch(error => {
+      console.log('Error!', error);
+  })
+})
+
 app.post('/insertar', (req, res)=>{
   const db = fire.firestore();
 	db.settings({

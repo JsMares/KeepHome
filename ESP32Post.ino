@@ -24,8 +24,13 @@ int gas = 0;
 bool estado_ruido = false;
 
 // credenciales de la red a la cual nos conectaremos
-const char* ssid = "iPhone de Jonathan";
-const char* password = "TLNy-QhGN-shM1-Io76";
+
+const char* ssid = "mares2022";
+const char* password = "0587824572";
+
+//const char* ssid = "iPhone de Jonathan";
+//const char* password = "TLNy-QhGN-shM1-Io76";
+
 //const char* ssid = "Tenda_3DE948";
 //const char* password = "18264838";
 //IPAddress ip(192,168,10,9);     
@@ -63,12 +68,30 @@ void setup() {
 void loop() {
   if(WiFi.status()== WL_CONNECTED ){ 
  //se agregan valores al documento
-    DinamicJsonDocument doc(2048);
+    DynamicJsonDocument doc(2048);
 
-    doc("gas") = analogRead(sensor_gas);
-    doc("movimiento") = digitalRead(sensor_movimiento);
-    doc("ruido") = digitalRead(sensor_ruido);
-    doc("temperatura") = dht.readTemperature();
+    doc["gas"] = analogRead(sensor_gas);
+
+    if(estado_movimiento == true){
+      doc["movimiento"] = 1;
+      estado_movimiento = false;
+    }else{
+      doc["movimiento"] = 0;
+    }
+
+    if(estado_ruido == true){
+      doc["ruido"] = 1;
+      estado_ruido = false;
+    }else{
+      doc["ruido"] = 0;
+    }
+
+    doc["temperatura"] = dht.readTemperature();
+
+    //doc["gas"] = analogRead(sensor_gas);
+    //doc["movimiento"] = digitalRead(sensor_movimiento);
+    //doc["ruido"] = digitalRead(sensor_ruido);
+    //doc["temperatura"] = dht.readTemperature();
 
   //doc["fecha"] = rtc.getDate();
 
@@ -79,7 +102,7 @@ void loop() {
   WiFiClient client;  // or WiFiClientSecure for HTTPS
   HTTPClient http;
   // Send request
-  http.begin("https://link de la API/insertar");
+  http.begin("https://guardiancasa.onrender.com/insertar");
   //cabeceras JSON
   http.addHeader("Content-Type", "application/json");
   int res = http.POST(json);
@@ -90,16 +113,16 @@ void loop() {
   Serial.println(res);
   // desconecta
   http.end();
-  delay(60000);
+  delay(5000);
   }
 }
 
 void interrupcion_ruido(){
-    Serial.println("Hubo un ruido dentro de la habitacion");
+    //Serial.println("Hubo un ruido dentro de la habitacion");
     estado_ruido = true;
 }
 
 void interrupcion_movimiento(){
-    Serial.println("Hubo un movimiento dentro de la habitacion");
+    //Serial.println("Hubo un movimiento dentro de la habitacion");
     estado_movimiento = true;
 }

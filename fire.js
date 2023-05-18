@@ -3,7 +3,6 @@ var firebase = require('firebase')
 var config = {
 
   apiKey: "acjmCmLxATjbpXDkDpYqMTXBoUV7GbkNE1Kjmu2P",
-  //apiKey: "55e51be1252537c24104c1850be158455909b77f",
   authDomain: "https://keephome-2e54e-default-rtdb.firebaseio.com/",
   projectId: "keephome-2e54e",
   storageBucket: "keephome-2e54e.appspot.com",
