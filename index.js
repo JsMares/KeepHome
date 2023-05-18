@@ -119,7 +119,7 @@ app.get('/registro_mayor', (req, res) => {
       timestampsInSnapshots: true
     });
     var wholeData = []
-	db.collection('valores').limit(10).where('gas', '>', 3000).orderBy('fecha','desc').get()
+	db.collection('valores').limit(10).where('gas', '>', 3000).get()
     .then(snapshot => {
       snapshot.forEach(doc => {
       
