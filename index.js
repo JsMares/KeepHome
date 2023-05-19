@@ -139,7 +139,7 @@ app.get('/registro_mayor_temperatura', (req, res) => {
       timestampsInSnapshots: true
     });
     var wholeData = []
-	db.collection('valores').where('temperatura', '>=', 28).get()
+	db.collection('valores').orderBy('fecha','desc').where('temperatura', '>=', 28).get()
     .then(snapshot => {
       snapshot.forEach(doc => {
       
