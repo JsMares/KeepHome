@@ -133,6 +133,26 @@ app.get('/registro_mayor', (req, res) => {
   })
 })
 
+app.get('/registro_mayor_temperatura', (req, res) => {
+  const db = fire.firestore();
+    db.settings({
+      timestampsInSnapshots: true
+    });
+    var wholeData = []
+	db.collection('valores').where('temperatura', '>=', 28).get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+      
+        wholeData.push(doc.data())
+      });
+      console.log(wholeData)
+      res.send(wholeData)
+    })
+    .catch(error => {
+      console.log('Error!', error);
+  })
+})
+
 app.post('/insertar', (req, res)=>{
   const db = fire.firestore();
 	db.settings({
