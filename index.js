@@ -74,6 +74,7 @@ app.get('/estado', (req, res) => {
       console.log('Error!', error);
   })
 })
+
 app.get('/valor', (req, res) => {
   const db = fire.firestore();
     db.settings({
@@ -125,34 +126,6 @@ app.get('/registro_mayor', (req, res) => {
       
         wholeData.push(doc.data())
       });
-      console.log(wholeData)
-      res.send(wholeData)
-    })
-    .catch(error => {
-      console.log('Error!', error);
-  })
-})
-
-app.get('/registro_mayor_temperatura', (req, res) => {
-  const db = fire.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
-    var wholeData = []
-	db.collection('valores').orderBy('temperatura','desc').get()
-    .then(snapshot => {
-      snapshot.forEach(doc => {
-      
-        wholeData.push(doc.data())
-      });
-
-      //return db.collection('valores').where('temperatura', '>=', 28).orderBy('fecha', 'desc').get()
-    })
-    .then((snapshot) => {
-      snapshot.forEach((doc) => {
-        wholeData.push(doc.data());
-      })
-
       console.log(wholeData)
       res.send(wholeData)
     })
