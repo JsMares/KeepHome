@@ -139,14 +139,14 @@ app.get('/registro_mayor_temperatura', (req, res) => {
       timestampsInSnapshots: true
     });
     var wholeData = []
-	db.collection('valores').where('temperatura', '>=', 28).orderBy('temperatura','desc').get()
+	db.collection('valores').orderBy('temperatura','desc').get()
     .then(snapshot => {
       snapshot.forEach(doc => {
       
         wholeData.push(doc.data())
       });
 
-      return db.collection('valores').where('temperatura', '>=', 28).orderBy('fecha', 'desc').get()
+      //return db.collection('valores').where('temperatura', '>=', 28).orderBy('fecha', 'desc').get()
     })
     .then((snapshot) => {
       snapshot.forEach((doc) => {
